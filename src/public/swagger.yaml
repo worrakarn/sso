@@ -1,0 +1,162 @@
+openapi: "3.0.2"
+info:
+  title: "Doc Api"
+  version: "1.0.0"
+servers:
+- url: http://localhost:4104/1.0.0/
+tags:
+- name: Client
+  description: "Client System"
+- name: User
+  description: "User System"
+- name: Oauth
+  description: "Oauth System"
+schemes:
+- "http"
+paths:
+  /sso/save_client:
+    post:
+      security:
+        - bearerAuth: []
+      tags: 
+        - Client
+      description: "Create Client"
+      required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClient'
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+  /sso/save_user:
+    post:
+      security:
+        - bearerAuth: []
+      tags: 
+        - User
+      description: "Create User"
+      required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+  /sso/token:
+    post:
+      security:
+        - basicAuth: []
+      tags: 
+        - Oauth
+      description: "Create Token"
+      required: true
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateToken'
+                - $ref: '#/components/schemas/RefreshToken'
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+  /sso/authenticate:
+    get:
+      security:
+        - bearerAuth: []
+      tags: 
+        - Oauth
+      description: "Authenticate"
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+  /sso/view_client:
+    get:
+      security:
+        - bearerAuth: []
+      tags: 
+        - Client
+      description: "View Client"
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+  /sso/view_user:
+    get:
+      security:
+        - bearerAuth: []
+      tags: 
+        - User
+      description: "View User"
+      responses:
+        200:
+          description: "Success"
+        500:
+          description: "Error"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key to authorize requests.
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    CreateClient:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        grants:
+          type: array
+          items:
+            type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+    CreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        username:
+          type: string
+    CreateToken:
+      type: object
+      properties:
+        grant_type:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+    RefreshToken:
+      type: object
+      properties:
+        grant_type:
+          type: string
+        refresh_token:
+          type: string

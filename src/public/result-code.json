@@ -1,0 +1,28 @@
+{
+  "GET": {
+    "100": "Success",
+    "101": "Data not found",
+    "102": "Data not validate"
+  },
+  "POST": {
+    "200": "Success",
+    "201": "Data not found",
+    "210": "Create success",
+    "211": "Data not validate",
+    "212": "Already data",
+    "220": "Update success"
+  },
+  "PUT": {
+    "300": "Update success",
+    "301": "Data is required",
+    "302": "Data not validate",
+    "303": "Data not found"
+  },
+  "DELETE": {
+    "600": "Delete success",
+    "601": "Data not found"
+  },
+  "ERROR": {
+    "500": "Internal server error"
+  }
+}
