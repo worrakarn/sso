@@ -3,7 +3,16 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "start": "node ./dist/config/www"
+        "start": "node ./dist/config/www",
+        "server": "babel-node ./src/config/www",
+        "server:prod": "node ./dist/config/www",
+        "dev": "set NODE_ENV=development &&npm-run-all server",
+        "clean": "rimraf dist",
+        "build": "babel ./src --out-dir dist",
+        "prod": "set NODE_ENV=production && npm-run-all clean build server:prod",
+        "watch": "nodemon",
+        "test": "mocha --require @babel/register --timeout 10000 ./src/test/*.js --exit",
+        "watch:test": "nodemon --exec \"mocha -R min\" --require @babel/register ./src/test/*.js"
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",

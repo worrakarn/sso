@@ -3,7 +3,7 @@ info:
   title: "Doc Api"
   version: "1.0.0"
 servers:
-- url: http://localhost:4104/1.0.0/
+- url: https://cryptic-cove-54046.herokuapp.com/1.0.0/
 tags:
 - name: Client
   description: "Client System"
