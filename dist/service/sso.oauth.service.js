@@ -15,6 +15,8 @@ var _ssoOauth = require("../model/sso.oauth.model");
 
 var _inspector = require("inspector");
 
+var _md = _interopRequireDefault(require("md5"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -247,18 +249,19 @@ function () {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _context6.next = 2;
+                password = (0, _md["default"])(password);
+                _context6.next = 3;
                 return _ssoUser.UserModel.findOne().and([{
                   username: username
                 }, {
                   password: password
                 }]).exec();
 
-              case 2:
+              case 3:
                 users = _context6.sent;
                 return _context6.abrupt("return", users);
 
-              case 4:
+              case 5:
               case "end":
                 return _context6.stop();
             }

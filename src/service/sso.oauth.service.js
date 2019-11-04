@@ -3,6 +3,7 @@ import { ClientModel } from "../model/sso.client.model";
 import { UserModel } from "../model/sso.user.model";
 import { TokenModel } from "../model/sso.oauth.model";
 import { Session } from "inspector";
+import md5 from "md5";
 
 export default class Oauth2 {
     constructor(Fn) {
@@ -65,8 +66,7 @@ export default class Oauth2 {
                 session = _session;
                 session.startTransaction();
 
-                await TokenModel.deleteMany()
-                    .and(condition)
+                await TokenModel.deleteMany().and(condition);
             })
             .then(async () => await Token.save())
             .then(() => session.commitTransaction())
@@ -79,6 +79,7 @@ export default class Oauth2 {
     }
 
     async getUser(username, password) {
+        password = md5(password);
         const users = await UserModel.findOne()
             .and([{ username: username }, { password: password }])
             .exec();

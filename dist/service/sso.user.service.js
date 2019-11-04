@@ -9,6 +9,8 @@ var _lodash = _interopRequireDefault(require("lodash"));
 
 var _ssoUser = require("../model/sso.user.model");
 
+var _md = _interopRequireDefault(require("md5"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -71,14 +73,15 @@ function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                dataReq.password = (0, _md["default"])(dataReq.password);
                 user = new _ssoUser.UserModel(dataReq);
-                _context2.next = 3;
+                _context2.next = 4;
                 return user.save();
 
-              case 3:
+              case 4:
                 return _context2.abrupt("return", _context2.sent);
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }

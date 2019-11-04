@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { UserModel, joiCreateUser } from "../model/sso.user.model";
+import md5 from "md5";
 
 export default class User {
     constructor(Fn, auth) {
@@ -14,6 +15,7 @@ export default class User {
     }
 
     async saveUser(dataReq) {
+        dataReq.password = md5(dataReq.password);
         const user = new UserModel(dataReq);
 
         return await user.save();
