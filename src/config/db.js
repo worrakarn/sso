@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb://localhost:27017/sso?retryWrites=false", {
+mongoose.connect("mongodb+srv://admin:admin123456@sso-5sunc.mongodb.net/sso?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
