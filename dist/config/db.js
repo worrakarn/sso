@@ -9,7 +9,7 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_mongoose["default"].connect("mongodb://localhost:27017/sso?retryWrites=false", {
+_mongoose["default"].connect("mongodb+srv://admin:admin123456@sso-5sunc.mongodb.net/sso?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
